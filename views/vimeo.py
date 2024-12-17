@@ -115,7 +115,8 @@ def delete_video(request: Request, video_id: str):
         )
 
         # delete the video from the vimeo
-        client.delete(video_id)
+        video_uri = "/videos/" + video_id
+        response = client.delete(video_uri)
 
         return Response(
             "Video deleted successfully", Status.HTTP_200_OK, None, None
