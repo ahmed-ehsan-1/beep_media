@@ -17,7 +17,7 @@
   ```json
   {
     "message": "Video uploaded successfully",
-    "status": 200,
+    "status": 201,
     "data": {
       "video_name": "string",
       "video_description": "string",

@@ -38,7 +38,7 @@ def upload_video(request: Request):
         payload["vimeo_video_id"] = uri
 
         return Response(
-            "Video uploaded successfully", Status.HTTP_200_OK, payload, None
+            "Video uploaded successfully", Status.HTTP_201_CREATED, payload, None
         ).to_json()
 
     except ValidationError as e:
@@ -47,6 +47,7 @@ def upload_video(request: Request):
     except Exception as e:
         print("Error: ", e)
         return Response(e, Status.HTTP_500_INTERNAL_SERVER_ERROR, None, None).to_json()
+
 
 def get_video_data(request: Request, video_id: str):
     try:
@@ -59,8 +60,24 @@ def get_video_data(request: Request, video_id: str):
         video_uri = "/videos/" + video_id
         response = client.get(video_uri)
 
+        response_data = response.json()
+        video_data = {
+            "name": response_data["name"],
+            "duration": response_data["duration"],
+            "uri": response_data["uri"],
+            "link": response_data["link"],
+            "description": response_data["description"],
+            "created_time": response_data["created_time"],
+            "user_uri": response_data["user"]["uri"],
+            "user_name": response_data["user"]["name"],
+            "user_link": response_data["user"]["link"],
+        }
+
         return Response(
-            "Video data retrieved successfully", Status.HTTP_200_OK, response.json(), None
+            "Video data retrieved successfully",
+            Status.HTTP_200_OK,
+            video_data,
+            None,
         ).to_json()
 
     except ValidationError as e:
@@ -90,10 +107,9 @@ def update_video_data(request: Request, video_id: str):
         if "video_description" in payload:
             video_data["description"] = payload["video_description"]
 
-
         video_uri = "/videos/" + video_id
         response = client.patch(video_uri, data=video_data)
-        
+
         return Response(
             "Video data updated successfully", Status.HTTP_200_OK, payload, None
         ).to_json()
