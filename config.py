@@ -10,6 +10,8 @@ VIMEO_CLIENT_ID = os.getenv("VIMEO_CLIENT_ID", "")
 VIMEO_CLIENT_SECRET = os.getenv("VIMEO_CLIENT_SECRET", "")
 VIMEO_ACCESS_TOKEN = os.getenv("VIMEO_ACCESS_TOKEN", "")
 
+WISTIA_API_TOKEN = os.getenv("WISTIA_API_TOKEN", "")
+
 logging.basicConfig(
     filename=os.getenv("APP_LOG", "app.log"),
     level=logging.DEBUG,
