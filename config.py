@@ -12,6 +12,11 @@ VIMEO_ACCESS_TOKEN = os.getenv("VIMEO_ACCESS_TOKEN", "")
 
 WISTIA_API_TOKEN = os.getenv("WISTIA_API_TOKEN", "")
 
+SURVEY_MONKEY_CLIENT_SECRET= os.getenv("SURVEY_MONKEY_CLIENT_SECRET", "")
+SURVEY_MONKEY_CLIENT_ID = os.getenv("SURVEY_MONKEY_CLIENT_ID", "")
+SURVEY_MONKEY_REDIRECT_URI = os.getenv("SURVEY_MONKEY_REDIRECT_URI", "")
+SURVEY_MONKEY_ACCESS_TOKEN = os.getenv("SURVEY_MONKEY_ACCESS_TOKEN", "")
+
 logging.basicConfig(
     filename=os.getenv("APP_LOG", "app.log"),
     level=logging.DEBUG,
