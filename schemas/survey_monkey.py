@@ -20,6 +20,6 @@ class QuestionFamily(enum.Enum):
 
 class CreateQuestionSchema(Schema):
     heading = fields.String(required=True)
-    choices = fields.List(fields.String(), required=True, validate=lambda x: x is not None if fields.String() != QuestionFamily.OPEN_ENDED else True)
+    choices = fields.List(fields.String(), missing=[])
     family = EnumField(QuestionFamily, by_value=True, missing=QuestionFamily.OPEN_ENDED)
 

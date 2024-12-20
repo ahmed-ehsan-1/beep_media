@@ -1,0 +1,890 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Survey Management API",
+        "description": "API for managing surveys in Survey Monkey.",
+        "version": "v1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://survey-monkey.example.com"
+        }
+    ],
+    "paths": {
+        "/survey_monkey/get_survey_list": {
+            "get": {
+                "description": "Retrieves the list of surveys.",
+                "operationId": "GetSurveyList",
+                "responses": {
+                    "200": {
+                        "description": "Survey list retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/create_survey": {
+            "post": {
+                "description": "Creates a new survey.",
+                "operationId": "CreateSurvey",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "title"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Survey created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/update_survey/{survey_id}": {
+            "put": {
+                "description": "Updates an existing survey.",
+                "operationId": "UpdateSurvey",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey to update.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "title"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Survey updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/survey_detail/{survey_id}": {
+            "get": {
+                "description": "Retrieves the details of a specific survey.",
+                "operationId": "GetSurveyDetails",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey to retrieve.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Survey details retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/delete_survey/{survey_id}": {
+            "delete": {
+                "description": "Deletes a specific survey.",
+                "operationId": "DeleteSurvey",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey to delete.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Survey deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/create_page/{survey_id}": {
+            "post": {
+                "description": "Creates a new page in a survey.",
+                "operationId": "CreatePage",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey to add a page to.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "position": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "title"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Page created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/get_page_list/{survey_id}": {
+            "get": {
+                "description": "Retrieves the list of pages in a survey.",
+                "operationId": "GetPageList",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey to retrieve pages from.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Pages retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/get_page/{survey_id}/{page_id}": {
+            "get": {
+                "description": "Retrieves a specific page in a survey.",
+                "operationId": "GetPage",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page to retrieve.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Page retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/update_page/{survey_id}/{page_id}": {
+            "put": {
+                "description": "Updates an existing page in a survey.",
+                "operationId": "UpdatePage",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page to update.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "position": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "title"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Page updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/delete_page/{survey_id}/{page_id}": {
+            "delete": {
+                "description": "Deletes a specific page in a survey.",
+                "operationId": "DeletePage",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page to delete.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Page deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/create_question/{survey_id}/{page_id}": {
+            "post": {
+                "description": "Creates a new question in a page.",
+                "operationId": "CreateQuestion",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page to add a question to.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "heading": {
+                                        "type": "string"
+                                    },
+                                    "choices": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "family": {
+                                        "type": "string",
+                                        "enum": [
+                                            "single_choice",
+                                            "multiple_choice",
+                                            "open_ended"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "heading",
+                                    "family"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Question created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/get_question_list/{survey_id}/{page_id}": {
+            "get": {
+                "description": "Retrieves the list of questions in a page.",
+                "operationId": "GetQuestionList",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page to retrieve questions from.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Questions retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/get_question/{survey_id}/{page_id}/{question_id}": {
+            "get": {
+                "description": "Retrieves a specific question in a page.",
+                "operationId": "GetQuestion",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "description": "The ID of the question to retrieve.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Question retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/update_question/{survey_id}/{page_id}/{question_id}": {
+            "put": {
+                "description": "Updates an existing question in a page.",
+                "operationId": "UpdateQuestion",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "description": "The ID of the question to update.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "heading": {
+                                        "type": "string"
+                                    },
+                                    "choices": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "family": {
+                                        "type": "string",
+                                        "enum": [
+                                            "single_choice",
+                                            "multiple_choice",
+                                            "open_ended"
+                                        ]
+                                    }
+                                },
+                                "required": [
+                                    "heading",
+                                    "family"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Question updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/survey_monkey/delete_question/{survey_id}/{page_id}/{question_id}": {
+            "delete": {
+                "description": "Deletes a specific question in a page.",
+                "operationId": "DeleteQuestion",
+                "parameters": [
+                    {
+                        "name": "survey_id",
+                        "in": "path",
+                        "description": "The ID of the survey.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "page_id",
+                        "in": "path",
+                        "description": "The ID of the page.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "question_id",
+                        "in": "path",
+                        "description": "The ID of the question to delete.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Question deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "status": {
+                                            "type": "integer"
+                                        },
+                                        "data": {
+                                            "type": "null"
+                                        },
+                                        "errors": {
+                                            "type": "null"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {}
+    }
+}

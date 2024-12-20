@@ -453,12 +453,11 @@ def create_question(request: Request, survey_id: str, page_id: str):
                 else "vertical"
             ),
             "required": None,
-            "answers": (
-                {"choices": [{"text": choice} for choice in payload["choices"]]}
-                if payload["family"] != QuestionFamily.OPEN_ENDED
-                else None
-            ),
+            "answers": {"choices": [{"text": choice} for choice in payload["choices"]]},
         }
+
+        if payload["family"] == QuestionFamily.OPEN_ENDED:
+            del request_payload["answers"]
 
         print("Payload: ", request_payload)
 
